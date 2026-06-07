@@ -31,25 +31,34 @@ export default function HeroNora() {
     );
 
     // Título aparece de baixo
-    heroTl.fromTo(heroTextRef.current?.querySelector("h1"), 
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.8"
-    );
+    const h1 = heroTextRef.current?.querySelector("h1");
+    if (h1) {
+      heroTl.fromTo(h1, 
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+        "-=0.8"
+      );
+    }
 
     // Parágrafo aparece
-    heroTl.fromTo(heroTextRef.current?.querySelector("p"), 
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.5"
-    );
+    const p = heroTextRef.current?.querySelector("p");
+    if (p) {
+      heroTl.fromTo(p, 
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+        "-=0.5"
+      );
+    }
 
     // Botão aparece
-    heroTl.fromTo(heroTextRef.current?.querySelector("button"), 
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-      "-=0.4"
-    );
+    const btn = heroTextRef.current?.querySelector("button");
+    if (btn) {
+      heroTl.fromTo(btn, 
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.4"
+      );
+    }
 
     // Parallax na imagem ao scrollar
     gsap.to(heroImageRef.current, {
