@@ -144,13 +144,13 @@ export default function HeroNora() {
           className="absolute top-[30%] left-[5%] md:left-[10%] z-20 flex flex-col items-start max-w-2xl text-white pointer-events-auto"
         >
           <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-6 drop-shadow-lg uppercase opacity-0">
-            Bem-vindo à<br /> Casa da Nora.
+            Hotel Rural &<br /> Restaurante
           </h1>
           <p className="text-lg md:text-xl font-light leading-relaxed mb-10 drop-shadow-md text-white/90 opacity-0">
-            Com ocupação de caráter rústico clássico e um restaurante carismático com vista para o canal, uma autêntica viagem pelo tempo no conforto dos nossos dias.
+            Às portas de Leiria, na localidade das Cortes, descubra o cómodo encanto da Casa da Nora, um espaço de poetas e pintores junto ao Rio Lis.
           </p>
           <button className="px-8 py-3 bg-[#8b6b4a] text-sm font-bold tracking-widest uppercase rounded hover:bg-[#6e5337] transition-colors shadow-lg opacity-0">
-            Casa da Nora
+            Reservar Agora
           </button>
         </div>
       </div>
@@ -181,13 +181,13 @@ export default function HeroNora() {
           className="absolute top-[40%] left-[8%] md:left-[15%] z-20 flex flex-col items-start gap-6 text-white opacity-0 pointer-events-auto"
         >
           <span className="text-sm font-bold tracking-widest uppercase drop-shadow-lg">
-            Rode a Nora
+            A Nossa História
           </span>
           <h2 className="text-4xl md:text-6xl font-serif leading-tight drop-shadow-lg">
-            Tradição<br />em Movimento
+            Tradição<br />junto ao Rio Lis
           </h2>
           <p className="text-lg font-light max-w-md drop-shadow-md text-white/90">
-            Há gerações a nossa nora marcar o ritmo da vida neste canal.
+            Uma antiga azenha recuperada que combina a sobriedade da arquitetura tradicional com o conforto moderno.
           </p>
           <div className="flex gap-3 mt-4 drop-shadow-md">
             <div className="w-10 h-10 rounded-full border border-white flex items-center justify-center cursor-pointer hover:bg-white hover:text-black transition-colors">
