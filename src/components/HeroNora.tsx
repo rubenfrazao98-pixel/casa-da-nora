@@ -175,7 +175,6 @@ export default function HeroNora() {
           loop
           muted
           playsInline
-          poster="/nora-real-photo.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/nora-video.mp4" type="video/mp4" />
