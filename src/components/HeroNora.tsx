@@ -2,106 +2,31 @@
 
 import { useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Menu, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
+  gsap.registerPlugin(useGSAP);
 }
 
 export default function HeroNora() {
   const containerRef = useRef<HTMLElement>(null);
-  const heroSectionRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const heroImageRef = useRef<HTMLDivElement>(null);
   const noraTextRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useGSAP(() => {
-    // Animações de entrada do Hero
-    const heroTl = gsap.timeline({ delay: 0.3 });
-
-    // Imagem faz zoom suave
-    heroTl.fromTo(heroImageRef.current, 
+    // Animação de entrada do vídeo
+    gsap.fromTo(videoSectionRef.current, 
       { scale: 1.1, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" }
+      { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out", delay: 0.3 }
     );
 
-    // Título aparece de baixo
-    const h1 = heroTextRef.current?.querySelector("h1");
-    if (h1) {
-      heroTl.fromTo(h1, 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        "-=0.8"
-      );
-    }
-
-    // Parágrafo aparece
-    const p = heroTextRef.current?.querySelector("p");
-    if (p) {
-      heroTl.fromTo(p, 
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        "-=0.5"
-      );
-    }
-
-    // Botão aparece
-    const btn = heroTextRef.current?.querySelector("button");
-    if (btn) {
-      heroTl.fromTo(btn, 
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-        "-=0.4"
-      );
-    }
-
-    // Parallax na imagem ao scrollar
-    gsap.to(heroImageRef.current, {
-      yPercent: 30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      },
-    });
-
-    // Timeline para transição entre seções
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=150%",
-        pin: true,
-        scrub: 1,
-      },
-    });
-
-    // Seção 1 desaparece
-    tl.to(heroSectionRef.current, {
-      opacity: 0,
-      y: -100,
-      duration: 1,
-    }, 0);
-
-    // Seção 2 (vídeo) aparece
-    tl.fromTo(videoSectionRef.current, 
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1 },
-      0.3
-    );
-
-    // Texto "Rode a Nora" aparece
-    tl.fromTo(noraTextRef.current, 
+    // Texto "Tradição" aparece
+    gsap.fromTo(noraTextRef.current, 
       { opacity: 0, x: -50 },
-      { opacity: 1, x: 0, duration: 1 },
-      0.8
+      { opacity: 1, x: 0, duration: 1, delay: 1 }
     );
 
   }, { scope: containerRef });
@@ -128,46 +53,10 @@ export default function HeroNora() {
   return (
     <section ref={containerRef} className="relative w-full h-screen bg-[#1a1a1a] overflow-hidden">
       
-      {/* ==================== SEÇÃO 1: HERO COM FOTO ==================== */}
-      <div 
-        ref={heroSectionRef}
-        className="absolute inset-0 w-full h-full"
-      >
-        {/* Container para a Imagem de Fundo com Parallax */}
-        <div 
-          ref={heroImageRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-w-full min-h-full aspect-[1195/896] flex items-center justify-center pointer-events-none opacity-0"
-        >
-          {/* A foto do restaurante */}
-          <img 
-            src="/casa-da-nova-bg.png" 
-            alt="Restaurante Casa da Nora" 
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30 z-0" />
-        </div>
-
-        {/* Texto do Hero */}
-        <div 
-          ref={heroTextRef}
-          className="absolute top-[30%] left-[5%] md:left-[10%] z-20 flex flex-col items-start max-w-2xl text-white pointer-events-auto"
-        >
-          <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-6 drop-shadow-lg uppercase opacity-0">
-            Hotel Rural &<br /> Restaurante
-          </h1>
-          <p className="text-lg md:text-xl font-light leading-relaxed mb-10 drop-shadow-md text-white/90 opacity-0">
-            Às portas de Leiria, na localidade das Cortes, descubra o cómodo encanto da Casa da Nora, um espaço de poetas e pintores junto ao Rio Lis.
-          </p>
-          <button className="px-8 py-3 bg-[#8b6b4a] text-sm font-bold tracking-widest uppercase rounded hover:bg-[#6e5337] transition-colors shadow-lg opacity-0">
-            Reservar Agora
-          </button>
-        </div>
-      </div>
-
-      {/* ==================== SEÇÃO 2: VÍDEO DA NORA ==================== */}
+      {/* ==================== VÍDEO DA NORA - TELA INTEIRA ==================== */}
       <div 
         ref={videoSectionRef}
-        className="absolute inset-0 w-full h-full opacity-0"
+        className="absolute inset-0 w-full h-full"
       >
         {/* Vídeo de fundo */}
         <video
@@ -186,7 +75,7 @@ export default function HeroNora() {
         {/* Texto "Rode a Nora" */}
         <div 
           ref={noraTextRef}
-          className="absolute top-[40%] left-[8%] md:left-[15%] z-20 flex flex-col items-start gap-6 text-white opacity-0 pointer-events-auto"
+          className="absolute top-[40%] left-[8%] md:left-[15%] z-20 flex flex-col items-start gap-6 text-white pointer-events-auto"
         >
           <span className="text-sm font-bold tracking-widest uppercase drop-shadow-lg">
             A Nossa História
