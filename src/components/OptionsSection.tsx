@@ -16,7 +16,7 @@ export default function OptionsSection() {
 
   useGSAP(() => {
     // Animação para os cards de opções
-    gsap.utils.toArray(".animate-card").forEach((card) => {
+    gsap.utils.toArray<HTMLElement>(".animate-card").forEach((card) => {
       gsap.fromTo(card, 
         { y: 60, opacity: 0 },
         {
@@ -34,7 +34,7 @@ export default function OptionsSection() {
     });
 
     // Animação para a galeria
-    gsap.utils.toArray(".gallery-item").forEach((item, i) => {
+    gsap.utils.toArray<HTMLElement>(".gallery-item").forEach((item, i) => {
       gsap.fromTo(item, 
         { y: 40, opacity: 0, scale: 0.95 },
         {

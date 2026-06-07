@@ -120,7 +120,7 @@ export default function BookingSection() {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
 
   useGSAP(() => {
-    gsap.utils.toArray(".booking-card").forEach((card, i) => {
+    gsap.utils.toArray<HTMLElement>(".booking-card").forEach((card, i) => {
       gsap.fromTo(card, 
         { y: 50, opacity: 0 },
         {
