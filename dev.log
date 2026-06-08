@@ -220,3 +220,28 @@
 ✓ Compiled in 39ms
  GET / 200 in 161ms (next.js: 71ms, application-code: 90ms)
  GET / 200 in 29ms (next.js: 4ms, application-code: 24ms)
+ GET / 200 in 1684ms (next.js: 360ms, application-code: 1324ms)
+ GET / 200 in 206ms (next.js: 12ms, application-code: 194ms)
+ GET / 200 in 164ms (next.js: 7ms, application-code: 156ms)
+✓ Compiled in 562ms
+ GET / 200 in 1001ms (next.js: 218ms, application-code: 783ms)
+✓ Compiled in 1191ms
+ GET / 200 in 1428ms (next.js: 1017ms, application-code: 411ms)
+ GET / 200 in 322ms (next.js: 5ms, application-code: 318ms)
+ GET / 200 in 217ms (next.js: 128ms, application-code: 89ms)
+ GET / 200 in 224ms (next.js: 111ms, application-code: 113ms)
+ GET / 200 in 233ms (next.js: 40ms, application-code: 193ms)
+ GET / 200 in 258ms (next.js: 148ms, application-code: 110ms)
+ GET / 200 in 130ms (next.js: 4ms, application-code: 126ms)
+ GET / 200 in 96ms (next.js: 9ms, application-code: 86ms)
+ GET / 200 in 210ms (next.js: 4ms, application-code: 206ms)
+○ Compiling /animations-demo ...
+ GET /animations-demo 200 in 3.8s (next.js: 3.7s, application-code: 106ms)
+ GET /animations-demo 200 in 71ms (next.js: 5ms, application-code: 66ms)
+ GET /animations-demo 200 in 275ms (next.js: 72ms, application-code: 204ms)
+ GET /animations-demo 200 in 65ms (next.js: 8ms, application-code: 57ms)
+ GET /animations-demo 200 in 142ms (next.js: 7ms, application-code: 134ms)
+ GET /animations-demo 200 in 62ms (next.js: 7ms, application-code: 55ms)
+ GET /animations-demo 200 in 192ms (next.js: 4ms, application-code: 188ms)
+ GET / 200 in 69ms (next.js: 6ms, application-code: 63ms)
+[?25h

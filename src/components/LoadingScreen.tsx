@@ -1,75 +1,116 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 
 export default function LoadingScreen() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wheelRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [opacity, setOpacity] = useState(1);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Espera a página carregar
-    const timer = setTimeout(() => {
-      // Começa a animação de fade out
-      setOpacity(0);
-      
-      // Remove o loading screen depois da animação
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-    }, 1500);
+    // Animação da roda
+    if (wheelRef.current) {
+      gsap.to(wheelRef.current, {
+        rotation: 360,
+        duration: 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
 
-    return () => clearTimeout(timer);
+    // Barra de progresso
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const next = prev + Math.random() * 15;
+        return next > 100 ? 100 : next;
+      });
+    }, 200);
+
+    // Fim do loading
+    const timer = setTimeout(() => {
+      clearInterval(interval);
+      setProgress(100);
+
+      // Fade out
+      setTimeout(() => {
+        if (containerRef.current) {
+          gsap.to(containerRef.current, {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.inOut",
+            onComplete: () => setIsLoading(false),
+          });
+        }
+      }, 400);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, []);
 
   if (!isLoading) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#1a1a1a] transition-opacity duration-500"
-      style={{ opacity }}
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#1a1a1a]"
     >
-      {/* Logo/Texto animado */}
-      <div className="flex flex-col items-center gap-4">
-        {/* Animação da roda */}
-        <div className="relative w-20 h-20">
-          <svg 
-            viewBox="0 0 100 100" 
-            className="w-full h-full animate-spin-slow"
-            style={{ animationDuration: "3s" }}
-          >
-            <circle 
-              cx="50" cy="50" r="40" 
-              fill="none" 
-              stroke="#8b6b4a" 
-              strokeWidth="2"
-              strokeDasharray="8 4"
-            />
-            <circle 
-              cx="50" cy="50" r="25" 
-              fill="none" 
-              stroke="#8b6b4a" 
+      {/* Roda da Nora SVG */}
+      <div ref={wheelRef} className="mb-8">
+        <svg
+          width="80"
+          height="80"
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Círculo externo */}
+          <circle cx="50" cy="50" r="45" stroke="#8b6b4a" strokeWidth="2" fill="none" opacity="0.5" />
+          
+          {/* Raios da roda */}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+            <line
+              key={i}
+              x1="50"
+              y1="50"
+              x2={50 + 35 * Math.cos((angle * Math.PI) / 180)}
+              y2={50 + 35 * Math.sin((angle * Math.PI) / 180)}
+              stroke="#8b6b4a"
               strokeWidth="1.5"
-              strokeDasharray="4 3"
+              opacity={0.6}
             />
-            <circle 
-              cx="50" cy="50" r="8" 
-              fill="#8b6b4a"
-            />
-          </svg>
-        </div>
-
-        {/* Texto */}
-        <h1 className="text-2xl font-serif text-white tracking-widest">
-          CASA DA NORA
-        </h1>
-        <p className="text-xs text-white/60 tracking-[0.3em] uppercase">
-          Restaurante & Hotel
-        </p>
+          ))}
+          
+          {/* Anel interno */}
+          <circle cx="50" cy="50" r="20" stroke="#8b6b4a" strokeWidth="1.5" fill="none" opacity="0.4" />
+          
+          {/* Centro */}
+          <circle cx="50" cy="50" r="5" fill="#8b6b4a" />
+          
+          {/* Círculo externo (mais visível) */}
+          <circle cx="50" cy="50" r="42" stroke="#d4af37" strokeWidth="1" fill="none" opacity="0.3" />
+        </svg>
       </div>
 
-      {/* Barra de carregamento */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-white/20 overflow-hidden">
-        <div className="h-full bg-[#8b6b4a] animate-loading-bar" />
+      {/* Texto */}
+      <div ref={textRef} className="text-center">
+        <h2 className="font-serif text-2xl text-white mb-2">Casa da Nora</h2>
+        <p className="text-sm text-white/50">Restaurante & Hotel Rural</p>
+      </div>
+
+      {/* Barra de progresso */}
+      <div className="mt-8 w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+        <div
+          ref={barRef}
+          className="h-full bg-gradient-to-r from-[#8b6b4a] to-[#d4af37] rounded-full transition-all duration-300 ease-out"
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   );
